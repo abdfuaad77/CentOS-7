@@ -7,24 +7,7 @@
 # Assign additional subnets
 #
 ###############################################################
-read -p "What is your active NIC?: " nic
-&&
-systemctl stop NetworkManager.service
-&&
-systemctl disable NetworkManager.service
-&&
-cd /etc/sysconfig/network-scripts
-&&
-echo "NM_CONTROLLED=no" >> ifcfg-$nic
-&&
-systemctl enable network.service
-&&
-chkconfig network on
-&&
-yum remove NetworkManager -y
-&&
-service network restart
-&&
+read -p "What is your active NIC?: " nic && systemctl stop NetworkManager.service && systemctl disable NetworkManager.service && cd /etc/sysconfig/network-scripts && echo "NM_CONTROLLED=no" >> ifcfg-$nic && systemctl enable network.service && chkconfig network on && yum remove NetworkManager -y && service network restart
 echo "Yay, it works, did you want to proceed with assigning the /24 subnet?: "
 select yn in "Yes" "No"; do
         case $yn in
@@ -37,7 +20,7 @@ PREFIX=$prefix
 CLONENUM_START=$column
 ONBOOT=yes
 NM_CONTROLLED=no
-ARPCHECK=no" > testing-purposes.txt
+ARPCHECK=no" > ifcfg-$nic-range0
 echo "That lovely information has been saved inside it's respected conf file. Don't forget to restart your network service ;)"
                                   break;;
                No )    echo "
