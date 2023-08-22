@@ -1,2 +1,2 @@
 # CentOS-7
-Interactive Kitty Script CentOS 7.x Networking
+Interactive Kitty Scripts CentOS 7.x
